@@ -2,7 +2,6 @@ from Helpers.GetDiscordClient import get_discord_client
 from Messages.IMessage import IMessage
 from decouple import config
 from Messages.MessagesNoArgs.Hello import Hello
-from Messages.MessagesNoArgs.Test import Test
 
 client = get_discord_client()
 
