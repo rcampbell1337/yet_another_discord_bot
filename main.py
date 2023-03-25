@@ -1,9 +1,11 @@
 import sys
+import asyncio
 from typing import List
 from Live.Bot import Bot
 from Testing.Test import Test
+from decouple import config
 
-if __name__ == "__main__":
+def main():
     permitted_args: List[str] = ["-test", "-live"]
     args: List[str] = sys.argv[1:]
 
@@ -14,4 +16,9 @@ if __name__ == "__main__":
         Test()
 
     if args[0] == "-live":
-        Bot()
+        token = config('DISCORD_TOKEN')
+        bot = Bot()
+        bot.run(token)
+
+main()
+
