@@ -23,11 +23,13 @@ class MockDiscordClient:
         """
         while True:
             selected_func = list(filter(lambda coro: coro.__name__ == "on_message", self._coro_list))[0]
-            if selected_func.__name__ == "on_message":
-                logger.debug("Enter a message to test: ")
-                message = input()
-                message_obj = Message(message)
-                await selected_func(message_obj)
+            logger.debug("Enter a message to test: ")
+            message = input()
+            message_obj = Message(message)
+            await selected_func(message_obj)
+
+            # Create a new line for spacing
+            print()
 
     def run(
         self,
