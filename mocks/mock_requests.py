@@ -1,17 +1,18 @@
+from typing import Dict
 from requests import Response
 
 
 class Requests:
-    def get(url) -> Response:
+    def get(self, url) -> Response:
         return Response({"content": "success"}, 200)
     
-    def post(url) -> Response:
+    def post(self, url: str, json) -> Response:
         return Response({"content": "success"}, 204)
     
-    def patch(url) -> Response:
+    def patch(self, url) -> Response:
         return Response({"content": "success"}, 200)
     
-    def delete(url) -> Response:
+    def delete(self, url) -> Response:
         return Response({"content": "success"}, 200)
 
 class Response:

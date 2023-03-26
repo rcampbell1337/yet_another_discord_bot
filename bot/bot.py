@@ -1,12 +1,12 @@
 import logging
-from helpers.get_discord_client import get_discord_client
+from helpers.live_or_mock_service import LiveOrMockService
 from messages.message_interfaces import IMessage
 from decouple import config
 from messages.messages_no_args.hello import Hello
 from messages.messages_with_args.howdy import Howdy
 from messages.messages_with_args.webhook import Webhook
 
-client = get_discord_client()
+client = requests = LiveOrMockService().discord_client
 logger = logging.getLogger("logger")
 
 @client.event

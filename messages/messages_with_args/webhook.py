@@ -1,6 +1,6 @@
 import logging
 from typing import List
-from helpers.get_requests_module import get_requests_module
+from helpers.live_or_mock_service import LiveOrMockService
 from messages.message_interfaces import IMessage
 
 class Webhook(IMessage):
@@ -24,10 +24,10 @@ class Webhook(IMessage):
         if len(self.params) != 1:
             return "Please only enter the webhook and nothing else for the $webhook command."
         
-        requests = get_requests_module()
+        requests = LiveOrMockService().requests
         webhook = self.params[0]
 
-        if "https://discord.com/api/webhooks/" not in webhook and len(webhook) != 121:
+        if "https://discord.com/api/webhooks/" not in webhook or len(webhook) != 121:
             return "Please input a valid Discord Webhook."
 
         data = {"content": 'Webhook has been added! (You can delete the previous message now)'}
