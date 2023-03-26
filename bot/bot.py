@@ -3,7 +3,7 @@ from helpers.get_discord_client import get_discord_client
 from messages.message_interfaces import IMessage
 from decouple import config
 from messages.messages_no_args.hello import Hello
-from messages.messages_with_args.say_hello import SayHello
+from messages.messages_with_args.howdy import Howdy
 
 client = get_discord_client()
 logger = logging.getLogger("logger")
@@ -21,8 +21,12 @@ async def on_message(message) -> None:
     Args:
         message (str): The message that has triggered the event.
     """
+    enabled_messages = config("ENABLED_MESSAGES").split(",")
+    message_content = message.content.split(" ")
+    if message_content[0][1:] not in enabled_messages:
+        return
+    
     for subclass in IMessage.__subclasses__():
-        message_content = message.content.split(" ")
         instance = subclass(params=message_content[1:])
         if message_content[0] == f"${instance.message}":
             logger.info(f"Sent message: {instance.message_to_send()}")

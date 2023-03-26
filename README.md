@@ -30,10 +30,9 @@ This is how one should use the local development mocks:
 Please tell me if there is anything that needs to be added to the mock, for the foreseeable future it will be quite basic.
 
 ### Creating a new command
-There are a few helpers that exist to help with the development process, but the key here is that each time you create a command it should extend from an Abstract Base Class
-(these are always defined with a preceding I). Point being that when we create them, the only config that exists will be the definition of the subclass itself, and then a subsequent
-import into the Bot.py file (this is necessary in Python as it cannot find subclasses without a reference to the file in question). There is no need for a neverending switch
-case, it is dynamically done in the Bot.py file by looking for all derived classes of our interface. We can also create new Interface types and add them to the file using a similar pattern to the one already utilised. An example of how to do this can be found in the "Hello.py" file, where a message must be defined (this corresponds to the trigger in discord) and the "message_to_send" message must be overridden.
+There are a few helpers that exist to help with the development process, but the key here is that each time you create a command it should extend from an Abstract Base Class (these are always defined with a preceding I).
+
+To actually register a new command with the bot, use (or create and configure) one of the existing Interfaces in a derived class. Once you have done that, import the derived class to the "bot.py" file at the top, and make sure to add to your ENABLED_PACKAGES in your .env file (to be extra helpful please also add it to the .env-example file). The purpose of this is so when we go live we can turn off commands without having to turn off the bot/ alter the code on live.
 
 ### Unit testing
 You can run unit tests with the python unittest library with the following command: py -m unittest discover testing "\*_test.py"
