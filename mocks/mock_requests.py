@@ -38,7 +38,7 @@ class Requests:
         Returns:
             Response: The response object.
         """
-        self.logger.Debug(f"Mocking a post request with URL: {url} and json: {json}")
+        self.logger.debug(f"Mocking a post request with URL: {url} and json: {json}")
         if self.status_code and self.response_message:
             return Response({"content": self.response_message}, self.status_code)
         return Response({"content": "success"}, 204)
