@@ -18,6 +18,16 @@ multiple paths for your local development testing.
 2. You can run "py main.py -test" to run a local instance of your bot which will mock whatever output you expect to happen without actually interacting
 with the live discord bot instance. You DO NOT require credntials to run this instance.
 
+### Recommended local development
+"py main.py -test" has been written to facilitate local development, mocking the live functionality of the Discord Bot by showing the output of messages which have been sent. 
+This is how one should use the local development mocks:
+1. When you run the py main.py -test command you will recieve the following response:
+![image](https://user-images.githubusercontent.com/56073739/227771118-e84b40d2-f1bd-4eee-b1db-064e1d18f4a3.png)
+2. Enter a command that you want to test: ![image](https://user-images.githubusercontent.com/56073739/227771180-88848cf9-00f2-495f-ab70-37b93368b324.png)
+3. Note the response that is recieved when you enter: ![image](https://user-images.githubusercontent.com/56073739/227771231-6a0c6a4a-6b9e-4faa-a7ee-981af013bfb6.png)
+
+Please tell me if there is anything that needs to be added to the mock, for the foreseeable future it will be quite basic.
+
 ### Creating a new command
 There are a few helpers that exist to help with the development process, but the key here is that each time you create a command it should extend from an Abstract Base Class
 (these are always defined with a preceding I). Point being that when we create them, the only config that exists will be the definition of the subclass itself, and then a subsequent
