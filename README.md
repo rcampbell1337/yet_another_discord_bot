@@ -23,10 +23,15 @@ with the live discord bot instance. You DO NOT require credentials to run this i
 "py main.py -test" has been written to facilitate local development, mocking the live functionality of the Discord Bot by showing the output of messages which have been sent. 
 This is how one should use the local development mocks:
 1. When you run the py main.py -test command you will recieve the following response:
+
 ![image](https://user-images.githubusercontent.com/56073739/227771118-e84b40d2-f1bd-4eee-b1db-064e1d18f4a3.png)
+
 2. Enter a command that you want to test: 
+
 ![image](https://user-images.githubusercontent.com/56073739/227771180-88848cf9-00f2-495f-ab70-37b93368b324.png)
+
 3. Note the response that is recieved when you enter: 
+
 ![image](https://user-images.githubusercontent.com/56073739/227771231-6a0c6a4a-6b9e-4faa-a7ee-981af013bfb6.png)
 
 Please tell me if there is anything that needs to be added to the mock, for the foreseeable future it will be quite basic.
