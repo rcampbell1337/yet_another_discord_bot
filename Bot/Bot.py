@@ -9,7 +9,7 @@ logger = logging.getLogger("logger")
 
 @client.event
 async def on_ready() -> None:
-    """Triggered when the live service is turned on.
+    """Triggered when the -live service is turned on.
     """
     logger.info("Bot is now online")
 

@@ -8,7 +8,7 @@ def initialize_logger(filename: str):
     in the .env file.
 
     Args:
-        filename (str): The name of the file where loge outputs should be saved to.
+        filename (str): The name of the file where log outputs should be saved to.
     """
     args: List[str] = sys.argv[1:]
     instance = args[0]
