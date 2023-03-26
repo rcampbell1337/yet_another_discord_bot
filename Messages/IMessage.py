@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class IMessage(ABC):
     """ Abstract base class representing an interaction which will send a message to Discord.
-    
+
     Args:
         ABC : The Abstract Base Class Restriction
     """

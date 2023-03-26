@@ -11,12 +11,13 @@
 6. Create a .env file, and ask me (Robbie) for the credentials to use the live version of the Discord Bot.
 
 ### Running the bot
-You have probably noticed that if you run the standard py main.py you will recieve an exception message, this is because there are
+You have probably noticed that if you run the standard py main.py you will recieve an exception, this is because there are
 multiple paths for your local development testing. 
 
 1. You can run "py main.py -live" to run an actual instance of the bot which will interact with discord. This DOES require the bot credentials.
 2. You can run "py main.py -test" to run a local instance of your bot which will mock whatever output you expect to happen without actually interacting
-with the live discord bot instance. You DO NOT require credntials to run this instance.
+
+with the live discord bot instance. You DO NOT require credentials to run this instance.
 
 ### Creating a new command
 There are a few helpers that exist to help with the development process, but the key here is that each time you create a command it should extend from an Abstract Base Class
