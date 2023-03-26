@@ -35,6 +35,11 @@ There are a few helpers that exist to help with the development process, but the
 import into the Bot.py file (this is necessary in Python as it cannot find subclasses without a reference to the file in question). There is no need for a neverending switch
 case, it is dynamically done in the Bot.py file by looking for all derived classes of our interface. We can also create new Interface types and add them to the file using a similar pattern to the one already utilised. An example of how to do this can be found in the "Hello.py" file, where a message must be defined (this corresponds to the trigger in discord) and the "message_to_send" message must be overridden.
 
+### Unit testing
+You can run unit tests with the python unittest library with the following command: py -m unittest discover testing "\*_test.py"
+Please name your test files with the following convention: {name_of_message_file}_test.py
+
+
 ### Coding standards
 1. As anal as it may be this project will use flake8, when you try to merge into develop if any Flake8 violations are found the build WILL FAIL.
 2. Please unit test your code to the best of your ability, if you get stuck with it, please ask someone else to help you write them (Robbie would probably enjoy doing it anyways)
