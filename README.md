@@ -39,7 +39,7 @@ case, it is dynamically done in the Bot.py file by looking for all derived class
 1. As anal as it may be this project will use flake8, when you try to merge into develop if any Flake8 violations are found the build WILL FAIL.
 2. Please unit test your code to the best of your ability, if you get stuck with it, please ask someone else to help you write them (Robbie would probably enjoy doing it anyways)
 3. If you install any dependencies to your project please run the following command "pip freeze > requirements.txt" to update the project requirements or the build WILL FAIL.
-4. File names/ classes are written in pascal case (HelloWorld), functions are written in snake case (hello_world) and any private members are written in snake case with a
+4. Classes are written in pascal case (HelloWorld), functions, files and folders are written in snake case (hello_world) and any private members are written in snake case with a
 preceding underscore (_hello_world)
 5. Please DO NOT version control secrets for the bot, it would be very annoying to regenerate them, always reference them from your local .env file
 6. Please use type hints wherever you can, it's not always possible but it is very helpful for readbility.
