@@ -1,5 +1,4 @@
 import sys
-import Bot.Bot
 from typing import List
 
 def main():
@@ -8,6 +7,7 @@ def main():
 
     if len(args) != 1 or args[0] not in permitted_args:
         raise Exception(f"Please specify one of the following Keywords when you run 'py main.py': {' ; '.join(permitted_args)}")
+    import Bot.Bot
 
 if __name__ == "__main__":
     main()
