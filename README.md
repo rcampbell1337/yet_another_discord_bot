@@ -41,6 +41,7 @@ case, it is dynamically done in the Bot.py file by looking for all derived class
 4. File names/ classes are written in pascal case (HelloWorld), functions are written in snake case (hello_world) and any private members are written in snake case with a
 preceding underscore (_hello_world)
 5. Please DO NOT version control secrets for the bot, it would be very annoying to regenerate them, always reference them from your local .env file
+6. Please use type hints wherever you can, it's not always possible but it is very helpful for readbility.
 
 # GIT
 
