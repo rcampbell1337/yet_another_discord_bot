@@ -4,6 +4,7 @@ from messages.message_interfaces import IMessage
 from decouple import config
 from messages.messages_no_args.hello import Hello
 from messages.messages_with_args.howdy import Howdy
+from messages.messages_with_args.webhook import Webhook
 
 client = get_discord_client()
 logger = logging.getLogger("logger")
@@ -29,8 +30,12 @@ async def on_message(message) -> None:
     for subclass in IMessage.__subclasses__():
         instance = subclass(params=message_content[1:])
         if message_content[0] == f"${instance.message}":
-            logger.info(f"Sent message: {instance.message_to_send()}")
-            await message.channel.send(instance.message_to_send())
+            message_to_send = instance.message_to_send()
+            if len(message_to_send) == 0:
+                return
+            
+            await message.channel.send(message_to_send)
+            logger.info(f"Sent message: {message_to_send}")
 
 token = config('DISCORD_TOKEN')
 client.run(token)
