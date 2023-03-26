@@ -7,10 +7,10 @@ from messages.messages_with_args.howdy import Howdy
 from messages.messages_with_args.webhook import Webhook
 
 # Configure the external services to be either live or mocked, and get the logger.
-live_or_mock_service = LiveOrMockService()
+live_or_mock_service = LiveOrMockService(config("MONGO_DB_CONN_URL"))
 client = live_or_mock_service.discord_client
 requests = live_or_mock_service.requests
-database = live_or_mock_service.database
+mongo_client = live_or_mock_service.mongo_client
 logger = logging.getLogger("logger")
 
 @client.event
@@ -32,7 +32,7 @@ async def on_message(message) -> None:
         return
 
     for subclass in IMessage.__subclasses__():
-        instance = subclass(params=message_content[1:], requests=requests, database=database)
+        instance = subclass(params=message_content[1:], requests=requests, mongo_client=mongo_client)
         if message_content[0] == f"${instance.message}":
             message_to_send = instance.message_to_send()
             if not message_to_send or len(message_to_send) == 0:

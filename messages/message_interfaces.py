@@ -15,7 +15,7 @@ class IMessage(ABC):
         message: str,
         params: List[str],
         requests: Requests = None,
-        database: MongoClient | MockMongoClient = None
+        mongo_client: MongoClient | MockMongoClient = None
     ) -> None:
         """ Constructor method.
 
@@ -28,7 +28,7 @@ class IMessage(ABC):
         self.message: str = message
         self.params: List[str] = params
         self.requests = requests
-        self.database = database
+        self.mongo_client = mongo_client
 
     @abstractmethod
     def message_to_send(self) -> str:

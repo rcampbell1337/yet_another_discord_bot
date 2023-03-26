@@ -10,13 +10,13 @@ from typing import List
 
 @dataclass
 class LiveOrMockService:
-    def __init__(self, connection_url: str = ""):
+    def __init__(self, connection_url: str):
         args: List[str] = sys.argv[1:]
 
         if len(args) == 1 and args[0] == "-test":
             self.discord_client = MockDiscordClient()
             self.requests = mock_requests()
-            self.database = MockMongoClient(connection_url)
+            self.mongo_client = MockMongoClient(connection_url)
         else:
             self.discord_client = discord.Client(intents=discord.Intents.all())
             self.requests = live_requests
