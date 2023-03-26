@@ -37,8 +37,8 @@ There are a few helpers that exist to help with the development process, but the
 To actually register a new command with the bot, use (or create and configure) one of the existing Interfaces in a derived class. Once you have done that, import the derived class to the "bot.py" file at the top, and make sure to add to your ENABLED_PACKAGES in your .env file (to be extra helpful please also add it to the .env-example file). The purpose of this is so when we go live we can turn off commands without having to turn off the bot/ alter the code on live.
 
 ### Unit testing
-You can run unit tests with the python unittest library with the following command: py -m unittest discover testing "\*_test.py"
-Please name your test files with the following convention: {name_of_message_file}_test.py
+You can run unit tests with the python unittest library with the following command: py -m unittest discover testing "\*_tests.py"
+Please name your test files with the following convention: {name_of_message_file}_tests.py
 
 
 ### Coding standards

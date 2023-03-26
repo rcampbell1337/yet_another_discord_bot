@@ -33,21 +33,20 @@ class Webhook(IMessage):
         response = requests.post(webhook, json=data)
         self.logger.info(f"Attempted to configure webhook {webhook} with statuscode: {response.status_code}")
         if response.status_code < 200 or response.status_code > 208:
-            return "Could not register the webhook, is the URL definitely correct?"
-        
+            return f"Could not register the webhook {webhook}, is the URL definitely correct?"
+
         webhook_db = self.mongo_client.get_database("webhook_db")
         webhooks = webhook_db.get_collection("webhooks")
 
         if webhook in [result["registered_webhook"] for result in webhooks.find()]:
             return f"The webhook {webhook} has already been registered, returning."
-        
+
         try:
             webhooks.insert_one({"registered_webhook": webhook})
             return "Successfully added webhook to database!"
         except Exception as e:
             self.logger.warning(e.message)
             return "Something went wrong when inserting the webhook into the database, please try again..."
-
 
     def no_params_give_instructions(self) -> str:
         return "By setting up a webhook with a given channel, it means that we can send timer specific messages to it! It's very easy to do, " \
