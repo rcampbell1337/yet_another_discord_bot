@@ -12,4 +12,5 @@ mccabe==0.7.0
 multidict==6.0.4
 pycodestyle==2.10.0
 pyflakes==3.0.1
+python-decouple==3.8
 yarl==1.8.2
