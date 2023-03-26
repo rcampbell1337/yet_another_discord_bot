@@ -1,4 +1,4 @@
-from Messages.IMessage import IMessage
+from messages.message import IMessage
 
 class Hello(IMessage):
     """An example class which sends "Hello there!" to a Discord channel when a user says hello.

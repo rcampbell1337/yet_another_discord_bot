@@ -1,8 +1,8 @@
 import logging
-from Helpers.GetDiscordClient import get_discord_client
-from Messages.IMessage import IMessage
+from helpers.get_discord_client import get_discord_client
+from messages.message import IMessage
 from decouple import config
-from Messages.MessagesNoArgs.Hello import Hello
+from messages.messages_no_args.hello import Hello
 
 client = get_discord_client()
 logger = logging.getLogger("logger")

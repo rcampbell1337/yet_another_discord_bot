@@ -1,7 +1,7 @@
 import sys
 from typing import List
 import discord
-from Mocks.MockDiscordClient import MockDiscordClient
+from mocks.mock_discord_client import MockDiscordClient
 
 
 def get_discord_client():
