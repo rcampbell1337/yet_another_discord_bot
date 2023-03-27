@@ -16,7 +16,7 @@ def initialize_logger(filename: str):
     channel_handler = logging.StreamHandler()
     channel_handler.setLevel(logging.DEBUG)
 
-    formatter = logging.Formatter(f"{instance[1:]} env - %(levelname)s:%(asctime)s: %(message)s")
+    formatter = logging.Formatter(f"{instance} env - %(levelname)s:%(asctime)s: %(message)s")
 
     channel_handler.setFormatter(formatter)
     logger.addHandler(channel_handler)
