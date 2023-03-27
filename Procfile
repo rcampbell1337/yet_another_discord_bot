@@ -1,1 +1,1 @@
-py main.py -live
+python ./main.py -live
