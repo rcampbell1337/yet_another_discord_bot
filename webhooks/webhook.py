@@ -12,19 +12,22 @@ class IWebhookMessage(ABC):
     def __init__(
         self,
         cron_trigger: CronTrigger,
+        name: str,
         webhooks: List[str],
         requests: Requests,
     ) -> None:
         """ Constructor method.
 
         Args:
-            message (str): The frequency that the function will be triggered.
-            params (List[str]): A list of all of the channels to send messages to.
-            params (requests | Requests): The mock or live requests module.
+            cron_trigger (str): The frequency that the function will be triggered.
+            name (str): The name representing the webhook (used to remove job from scheduler).
+            webhooks (List[str]): A list of all of the channels to send messages to.
+            requests (requests | Requests): The mock or live requests module.
         """
         self.cron_trigger: CronTrigger = cron_trigger
         self.webhook: List[str] = webhooks
         self.requests = requests
+        self.name = name
 
     @abstractmethod
     def message_to_send(self) -> str:

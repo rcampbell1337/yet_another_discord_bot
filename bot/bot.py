@@ -29,8 +29,9 @@ async def on_ready() -> None:
     sched.start()
     for subclass in IWebhookMessage.__subclasses__():
         instance = subclass(webhooks=[], requests=requests)
-        sched.add_job(instance.message_to_send, instance.cron_trigger)
+        sched.add_job(func=instance.message_to_send, trigger=instance.cron_trigger, id=instance.name)
         logger.info(f"Successfully registered webhook: {instance.__class__} on interval {instance.cron_trigger}")
+        sched.remove_job(instance.name)
 
 @client.event
 async def on_message(message) -> None:
