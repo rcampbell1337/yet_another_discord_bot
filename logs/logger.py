@@ -1,5 +1,4 @@
 import logging
-import sys
 from ast import List
 from decouple import config
 
@@ -10,8 +9,7 @@ def initialize_logger(filename: str):
     Args:
         filename (str): The name of the file where log outputs should be saved to.
     """
-    args: List[str] = sys.argv[1:]
-    instance = args[0]
+    instance = config("ENVIRONMENT")
     logger = logging.getLogger("logger")
     logger.setLevel(logging.DEBUG)
 
