@@ -1,10 +1,17 @@
 import logging
 from helpers.live_or_mock_service import LiveOrMockService
-from messages.message_interfaces import IMessage
 from decouple import config
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+
+# Register all Discord Message triggered functions.
+from messages.message_interfaces import IMessage
 from messages.messages_no_args.hello import Hello
 from messages.messages_with_args.howdy import Howdy
-from messages.messages_with_args.webhook import Webhook
+from messages.messages_with_args.set_webhook import Webhook
+
+# Register all timer triggered discord functions.
+from webhooks.webhook import IWebhookMessage
+from webhooks.test import Test
 
 # Configure the external services to be either live or mocked, and get the logger.
 live_or_mock_service = LiveOrMockService(config("MONGO_DB_CONN_URL"))
@@ -18,6 +25,11 @@ async def on_ready() -> None:
     """Triggered when the -live service is turned on.
     """
     logger.info("Bot is now online")
+    sched = AsyncIOScheduler()
+    sched.start()
+    for subclass in IWebhookMessage.__subclasses__():
+        instance = subclass(webhooks=[], requests=requests)
+        sched.add_job(instance.message_to_send, instance.cron_trigger)
 
 @client.event
 async def on_message(message) -> None:

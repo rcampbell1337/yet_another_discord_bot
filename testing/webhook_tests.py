@@ -1,6 +1,6 @@
 import copy
 import unittest
-from messages.messages_with_args.webhook import Webhook
+from messages.messages_with_args.set_webhook import Webhook
 from mocks.mock_mongo_client import MockMongoClient
 from mocks.mock_requests import Requests as mock_requests
 
