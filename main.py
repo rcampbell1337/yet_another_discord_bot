@@ -11,6 +11,4 @@ def main():
     initialize_logger(config("LOGGER_FILE"))
     import bot.bot
 
-
-if __name__ == "__main__":
-    main()
+main()
