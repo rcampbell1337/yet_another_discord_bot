@@ -73,8 +73,7 @@ def main():
 
         try:
             webhooks.insert_one({"registered_webhook": webhook, "server": url_params["id"][0]})
-            requests.post(webhook, json={"content": f"Webhook Added! Use this URL to enter birthdays: \
-                                        {config('HOSTNAME')}?id={server}&webhook_set=true&discord_server_name={server_name}"})
+            requests.post(webhook, json={"content": f"""Webhook Added! Use this URL to enter birthdays: {config('HOSTNAME')}?id={server}&webhook_set=true&discord_server_name={server_name}"""})
             latest_iteration.success("Successfully added webhook for your server!")
             bar.progress(100)
         except Exception as e:
@@ -94,6 +93,9 @@ def main():
         st.text_input("Paste your webhook here", key="webhook")
         st.button("Submit Webhook", on_click=upload_webhook)
     else:
-        st.write("Add a birthday!")
+        st.write("#### All you have to do is enter your name and your birthday!")
+        st.text_input("Enter your name:", key="name")
+        st.date_input("Enter your birthday:", key="birthday")
+
     
 main()
