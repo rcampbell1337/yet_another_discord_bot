@@ -8,9 +8,11 @@ from helpers.live_or_mock_service import LiveOrMockService
 logger = logging.getLogger("logger");
 url_params: Dict[str, str] = st.experimental_get_query_params()
 services = LiveOrMockService()
-webhook_set = url_params["webhook_set"][0] == "true"
+webhook_db = services.mongo_client.get_database("webhook_db")
+webhooks = webhook_db.get_collection("webhooks")
 server_name = url_params["discord_server_name"][0]
 server_id = url_params["id"][0]
+webhook_set = len(list(webhooks.find({"server": server_id}))) > 0
 
 def upload_webhook():
     # Add a placeholder
@@ -46,8 +48,6 @@ def upload_webhook():
 
     time.sleep(1)
 
-    webhook_db = services.mongo_client.get_database("webhook_db")
-    webhooks = webhook_db.get_collection("webhooks")
     registered_webhooks = webhooks.find()
 
     if webhook in [result["registered_webhook"] for result in registered_webhooks]:
@@ -71,25 +71,25 @@ def upload_webhook():
         logger.warning(e.message)
         latest_iteration.error("Something went wrong when inserting the webhook into the database, please try again...")
         bar.error("Errored when uploading to database.")
+    finally:
+        time.sleep(3)
+        latest_iteration.empty()
+        bar.empty()
 
 def upload_birthday():
-    webhook_db = services.mongo_client.get_database("webhook_db")
-    webhooks = webhook_db.get_collection("webhooks")
     existing_server_birthdays = webhooks.find_one({"server": server_id})["birthdays"]
     existing_server_birthdays.append({"name": st.session_state.name, "birthday": str(st.session_state.birthday)})
     webhooks.update_one({"server": server_id}, { "$set": {"birthdays":  existing_server_birthdays} })
 
 
 def main():
-    if "webhook_set" not in url_params.keys() \
-        or "discord_server_name" not in url_params.keys() \
-        or "id" not in url_params.keys():
-            st.write("# Invalid Url")
-            st.image("https://steamuserimages-a.akamaihd.net/ugc/959732343597073737/5FBAF677D6CFDB27481A5F5E2C146F4858F963BA/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
-                     , use_column_width="always")
-            st.write("### Please make sure to use a URL provided by the Discord Bot.")
+    if "discord_server_name" not in url_params.keys() or "id" not in url_params.keys():
+        st.write("# Invalid Url")
+        st.image("https://steamuserimages-a.akamaihd.net/ugc/959732343597073737/5FBAF677D6CFDB27481A5F5E2C146F4858F963BA/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+                    , use_column_width="always")
+        st.write("### Please make sure to use a URL provided by the Discord Bot.")
 
-            return
+        return
 
 
     st.title = "Add a birthday to your server!"
