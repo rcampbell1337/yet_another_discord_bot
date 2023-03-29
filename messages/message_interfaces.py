@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
+from discord import Guild
 from pymongo import MongoClient
 from mocks.mock_mongo_client import MockMongoClient
 from mocks.mock_requests import Requests
@@ -12,6 +13,7 @@ class IMessage(ABC):
     """
     def __init__(
         self,
+        server: Guild,
         message: str,
         params: List[str],
         requests: Requests = None,
@@ -25,6 +27,7 @@ class IMessage(ABC):
             params (requests | Requests): The mock or live requests module.
             params (MongoClient | MockMongoClient): The mock or live Mongo DB Client.
         """
+        self.server: Guild = server
         self.message: str = message
         self.params: List[str] = params
         self.requests = requests
