@@ -43,7 +43,7 @@ async def on_message(message: Message) -> None:
     """
     enabled_messages = config("ENABLED_MESSAGES").split(",")
     message_content = message.content.split(" ")
-    server = message.guild.id
+    server = message.guild
     if message_content[0][1:] not in enabled_messages:
         return
 
