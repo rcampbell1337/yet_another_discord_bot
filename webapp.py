@@ -87,7 +87,7 @@ def upload_birthday():
 def main():
     if "discord_server_name" not in url_params.keys() or "id" not in url_params.keys():
         st.write("# Invalid Url")
-        st.image("https://steamuserimages-a.akamaihd.net/ugc/959732343597073737/5FBAF677D6CFDB27481A5F5E2C146F4858F963BA/?imw=5000&imh=5000&ima=fit&"
+        st.image("https://steamuserimages-a.akamaihd.net/ugc/959732343597073737/5FBAF677D6CFDB27481A5F5E2C146F4858F963BA/?imw=5000&imh=5000&ima=fit&" \
                  "impolicy=Letterbox&imcolor=%23000000&letterbox=false", use_column_width="always")
 
         st.write("### Please make sure to use a URL provided by the Discord Bot.")
