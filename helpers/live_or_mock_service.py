@@ -9,14 +9,14 @@ from decouple import config
 
 @dataclass
 class LiveOrMockService:
-    def __init__(self, connection_url: str):
+    def __init__(self):
         args: str = config("ENVIRONMENT")
 
         if args == "test":
             self.discord_client = MockDiscordClient()
             self.requests = mock_requests()
-            self.mongo_client = MockMongoClient(connection_url)
+            self.mongo_client = MockMongoClient(config("MONGO_DB_CONN_URL"))
         else:
             self.discord_client = discord.Client(intents=discord.Intents.all())
             self.requests = live_requests
-            self.mongo_client = MongoClient(connection_url)
+            self.mongo_client = MongoClient(config("MONGO_DB_CONN_URL"))

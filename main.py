@@ -11,4 +11,5 @@ def main():
     initialize_logger(config("LOGGER_FILE"))
     import bot.bot
 
+
 main()
