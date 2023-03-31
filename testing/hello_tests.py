@@ -7,4 +7,4 @@ class TestHelloMessage(unittest.TestCase):
     def test_hellopackage_sendsmessage(self) -> None:
         """Tests that the send_message command has the intended output.
         """
-        self.assertEqual("Hello there mate!", Hello([]).message_to_send())
+        self.assertEqual("Hello there mate!", Hello(None, [], None, None).message_to_send())
