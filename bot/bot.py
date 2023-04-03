@@ -9,7 +9,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from messages.message_interfaces import IMessage
 from messages.messages_no_args.hello import Hello
 from messages.messages_with_args.howdy import Howdy
-from messages.messages_with_args.set_webhook import Webhook
+from messages.messages_with_args.enter_birthday import Webhook
 
 # Register all timer triggered discord functions.
 from webhooks.webhook import IWebhookMessage

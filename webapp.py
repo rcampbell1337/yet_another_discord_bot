@@ -1,3 +1,4 @@
+import datetime
 import logging
 import time
 import streamlit as st
@@ -11,11 +12,11 @@ class WebApp:
         self.url_params: Dict[str, str] = st.experimental_get_query_params()
         self.services = LiveOrMockService()
         self.webhook_db = self.services.mongo_client.get_database("webhook_db")
-        webhooks = self.webhook_db.get_collection("webhooks")
+        self.webhooks = self.webhook_db.get_collection("webhooks")
         if len(self.url_params) == 2:
             self.server_name = self.url_params["discord_server_name"][0] or ""
             self.server_id = self.url_params["id"][0] or ""
-            self.webhook_set = len(list(webhooks.find({"server": self.server_id}))) > 0
+            self.webhook_set = len(list(self.webhooks.find({"server": self.server_id}))) > 0
 
     def upload_webhook(self):
         # Add a placeholder
@@ -67,8 +68,7 @@ class WebApp:
 
         try:
             self.webhooks.insert_one({"registered_webhook": webhook, "server": self.server_id, "birthdays": []})
-            requests.post(webhook, json={"content": f"""Webhook Added! Use this URL to enter birthdays: {config('HOSTNAME')}
-                                        ?id={self.server_id}&webhook_set=true&discord_server_name={self.server_name}"""})
+            requests.post(webhook, json={"content": f"""Webhook Added! Use this URL to enter birthdays: {config('HOSTNAME')}?id={self.server_id}&webhook_set=true&discord_server_name={self.server_name}"""})
             latest_iteration.success("Successfully added webhook for your server!")
             bar.progress(100)
 
@@ -110,7 +110,13 @@ class WebApp:
         else:
             st.write("#### All you have to do is enter your name and your birthday!")
             st.text_input("Enter your name:", key="name")
-            st.date_input("Enter your birthday:", key="birthday")
+            st.date_input(
+                label="Enter your birthday:", 
+                key="birthday", 
+                value=datetime.date(2000, 1, 1), 
+                min_value=datetime.date(1920, 1, 1), 
+                max_value=datetime.date(datetime.datetime.now().year - 10, 1, 1)
+            )
             st.button("Enter Birthday", on_click=self.upload_birthday)
             st.image("https://media3.giphy.com/media/zGnnFpOB1OjMQ/200.gif", use_column_width="always")
 

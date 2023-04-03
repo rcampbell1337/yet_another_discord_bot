@@ -1,6 +1,6 @@
 import dataclasses
 import unittest
-from messages.messages_with_args.set_webhook import Webhook
+from messages.messages_with_args.enter_birthday import Webhook
 
 @dataclasses.dataclass
 class Guild:
